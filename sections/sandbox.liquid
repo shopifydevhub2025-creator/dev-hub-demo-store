@@ -1,0 +1,24 @@
+{% assign section_name = "Sandbox" %}
+{% assign first_product = all_products['my-first-product'] %}
+
+<span>{{ section_name }}</span> <br>
+<span>Title: {{ first_product.title | remove: 'My' |  upcase}}</span> <br>
+
+{% if first_product.price <= 50000 %} 
+    <span style="color:red">Sale</span> <br>
+{% endif %}
+
+<span>Price: {{ first_product.price | money }}</span> <br>
+
+
+{% schema %}
+{
+  "name": "Sandbox",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Sandbox"
+    }
+  ]
+}
+{% endschema %}
