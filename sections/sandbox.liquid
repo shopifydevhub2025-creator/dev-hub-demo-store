@@ -1,3 +1,4 @@
+{% comment  %} 
 {% assign section_name = "Sandbox" %}
 {% assign first_product = all_products['my-first-product'] %}
 
@@ -9,6 +10,70 @@
 {% endif %}
 
 <span>Price: {{ first_product.price | money }}</span> <br>
+{% endcomment %}
+
+
+Les 2
+{% comment %}
+ 
+{% if умова %}
+  <!-- Код, який виконається, якщо умова істинна -->
+{% elsif інша_умова %}
+  <!-- Код, який виконається, якщо перша умова хибна, але інша умова істинна -->
+{% else %}
+  <!-- Код, який виконається, якщо всі умови хибні -->
+{% endif %}
+
+{% assign input_form_age = 18 %}
+{% assign min_age = 21 %}
+{% assign old_age = 50 %}
+
+{% if min_age > input_form_age %}
+  Ви неповнолітні
+{% elsif min_age < input_form_age and input_form_age < old_age %}
+  Ви молодь
+{% else %}
+ Ви дорослий
+{% endif %}
+
+{% if min_age <= input_form_age %}
+  Добре, можете продовжити покупки
+{% endif %}
+{% endcomment %}
+
+{% assign first_product = all_products['my-first-product'] %}
+
+{% if first_product.price < first_product.compare_at_price %}
+  <span class="sale">Знижка!</span>
+{% endif %}
+
+{% if first_product.tags contains 'новинка' %}
+  <span>Новинка!</span>
+{% endif %}
+
+{% unless first_product.price > first_product.compare_at_price %}
+  <span class="sale">Знижка!</span>
+{% endunless %}
+
+{% case first_product.type %}
+  {% when 'T-shirt' %}
+    Футболка
+  {% when 'Shoes' %}
+    Взуття
+  {% else %}
+    Інший товар
+{% endcase %}
+
+{% comment %}
+{% case product.type %}
+  {% when 'T-shirt' %}
+    Футболка
+  {% when 'Shoes' %}
+    Взуття
+  {% else %}
+    Інший товар
+{% endcase %}
+{% endcomment %}
 
 
 {% schema %}
