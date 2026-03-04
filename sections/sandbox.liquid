@@ -1,79 +1,30 @@
-{% comment  %} 
-{% assign section_name = "Sandbox" %}
-{% assign first_product = all_products['my-first-product'] %}
-
-<span>{{ section_name }}</span> <br>
-<span>Title: {{ first_product.title | remove: 'My' |  upcase}}</span> <br>
-
-{% if first_product.price <= 50000 %} 
-    <span style="color:red">Sale</span> <br>
-{% endif %}
-
-<span>Price: {{ first_product.price | money }}</span> <br>
-{% endcomment %}
-
-
-Les 2
 {% comment %}
- 
-{% if умова %}
-  <!-- Код, який виконається, якщо умова істинна -->
-{% elsif інша_умова %}
-  <!-- Код, який виконається, якщо перша умова хибна, але інша умова істинна -->
-{% else %}
-  <!-- Код, який виконається, якщо всі умови хибні -->
-{% endif %}
+  {% for item in (1..10) %}
+    {% if item > 5 %}
+      {% break %}
+    {% endif %}
 
-{% assign input_form_age = 18 %}
-{% assign min_age = 21 %}
-{% assign old_age = 50 %}
+    {{ item }}
 
-{% if min_age > input_form_age %}
-  Ви неповнолітні
-{% elsif min_age < input_form_age and input_form_age < old_age %}
-  Ви молодь
-{% else %}
- Ви дорослий
-{% endif %}
-
-{% if min_age <= input_form_age %}
-  Добре, можете продовжити покупки
-{% endif %}
+    {% unless forloop.last %} , {% endunless %}
+  {% endfor %}
 {% endcomment %}
 
-{% assign first_product = all_products['my-first-product'] %}
 
-{% if first_product.price < first_product.compare_at_price %}
-  <span class="sale">Знижка!</span>
-{% endif %}
+{% for collection in collections %}
+  {% paginate collection.products by 70, window_size: 2 %}
+    {% for product in collection.products %}
+      {% if forloop.first %}
+        forloop.length - {{ forloop.length }} <br>
+      {% endif %}
+      
+      {{ forloop.index }} - {{ product.title }} <br>
+    {% endfor %}
 
-{% if first_product.tags contains 'новинка' %}
-  <span>Новинка!</span>
-{% endif %}
+     {{- paginate | default_pagination }}
+  {% endpaginate %}
+{% endfor %}
 
-{% unless first_product.price > first_product.compare_at_price %}
-  <span class="sale">Знижка!</span>
-{% endunless %}
-
-{% case first_product.type %}
-  {% when 'T-shirt' %}
-    Футболка
-  {% when 'Shoes' %}
-    Взуття
-  {% else %}
-    Інший товар
-{% endcase %}
-
-{% comment %}
-{% case product.type %}
-  {% when 'T-shirt' %}
-    Футболка
-  {% when 'Shoes' %}
-    Взуття
-  {% else %}
-    Інший товар
-{% endcase %}
-{% endcomment %}
 
 
 {% schema %}
